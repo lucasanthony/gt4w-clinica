@@ -33,6 +33,9 @@ export default function Card(props) {
             <b>Peso:</b> {props.peso} kg
           </p>
           <p>
+            <b>Altura:</b> {props.altura} m
+          </p>
+          <p>
             <b>Estado:</b> {props.uf}
           </p>
         </div>

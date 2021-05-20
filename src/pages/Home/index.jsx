@@ -27,13 +27,13 @@ export default function Home(props) {
     { nome: "Enfermeiro 7" },
   ]);
   const [pacientes, setPacientes] = useState([
-    { nome: "Paciente 1", data_nascimento: "09/08/1997", peso: "88", uf: "PB" },
-    { nome: "Paciente 2", data_nascimento: "24/08/1999", peso: "81", uf: "PB" },
-    { nome: "Paciente 3", data_nascimento: "23/07/1999", peso: "70", uf: "RN" },
-    { nome: "Paciente 4", data_nascimento: "24/10/1977", peso: "56", uf: "PB" },
-    { nome: "Paciente 5", data_nascimento: "24/08/1999", peso: "66", uf: "PE" },
-    { nome: "Paciente 6", data_nascimento: "21/05/1999", peso: "71", uf: "RN" },
-    { nome: "Paciente 7", data_nascimento: "24/01/1994", peso: "88", uf: "PB" },
+    { nome: "Paciente 1", data_nascimento: "09/08/1997", peso: "88", altura: "1,88", uf: "PB" },
+    { nome: "Paciente 2", data_nascimento: "24/08/1999", peso: "81", altura: "1,88", uf: "PB" },
+    { nome: "Paciente 3", data_nascimento: "23/07/1999", peso: "70", altura: "1,88", uf: "RN" },
+    { nome: "Paciente 4", data_nascimento: "24/10/1977", peso: "56", altura: "1,88", uf: "PB" },
+    { nome: "Paciente 5", data_nascimento: "24/08/1999", peso: "66", altura: "1,88", uf: "PE" },
+    { nome: "Paciente 6", data_nascimento: "21/05/1999", peso: "71", altura: "1,88", uf: "RN" },
+    { nome: "Paciente 7", data_nascimento: "24/01/1994", peso: "88", altura: "1,88", uf: "PB" },
     {
       nome: "Paciente 8",
       data_nascimento: "10/08/1993",
@@ -145,6 +145,7 @@ export default function Home(props) {
                     data_nascimento={paciente.data_nascimento}
                     peso={paciente.peso}
                     uf={paciente.uf}
+                    altura={paciente.altura}
                     key={paciente.nome}
                   />
                 ))}
