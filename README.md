@@ -1,10 +1,15 @@
-# gt4w-clinica
+# gt4w clinica
 
 ### Frameworks e tecnologias utilizadas
 * `ReactJs`
 * `CSS`
 * `HTML`
 * `JavaScript`
+
+### Bibliotecas utilizadas (sem contar as default do React)
+* `React-icons`
+* `React-toastify`
+* `axios`
 
 ### Como utilizar
 

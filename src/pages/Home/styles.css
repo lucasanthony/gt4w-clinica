@@ -31,10 +31,18 @@
   width: 40%;
   height: 89vh;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .restaurant_home_card_info p {
   color: #ffffff;
+}
+
+select {
+  margin-top: 6%;
+  height: 8%;
 }
 
 #adicionar-paciente {

@@ -1,0 +1,57 @@
+.enfermeiro_card {
+  display: flex;
+  padding: 10px;
+  background-color: #f5f5f5;
+  width: 90%;
+  justify-content: space-between;
+  margin-top: 10px;
+  border-radius: 12px;
+  border: solid 1px #bebebe;
+  position: relative;
+  overflow-wrap: anywhere;
+}
+
+.enfermeiro_card > div > span {
+  font-weight: bold;
+}
+
+.texts_div {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  min-height: 90px;
+  color: #333;
+}
+
+.icons_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 40px;
+  height: 100%;
+}
+
+#trash_icon,
+#copy_icon {
+  border: solid 1px #bebebe;
+  border-radius: 6px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+}
+
+#copy_icon {
+  background-color: green;
+}
+
+#trash_icon {
+  background-color: #f02849;
+}
+
+
