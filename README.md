@@ -11,6 +11,9 @@
 * `React-toastify`
 * `axios`
 
+### Deploy
+* O sistema encontra-se hospedado no Heroku, [acessível aqui](https://gt4w-clinica.herokuapp.com/) ou no menu ao lado
+
 ### Como utilizar
 
 * `Clone o repositório na sua máquina`
