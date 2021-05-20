@@ -1,0 +1,29 @@
+.card {
+  margin-left: 5%;
+  margin-top: 2%;
+  width: 85%;
+  height: 8vh;
+  padding: 3%;
+  border-radius: 30px;
+  background-color: green;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+  cursor: pointer;
+  border: solid 2px gray;
+  color: white;
+  font-weight: bold;
+}
+
+.card > p {
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 500px) {
+  .card {
+    border-radius: 15px;
+    margin-top: 4%;
+  }
+}

@@ -1,0 +1,14 @@
+.custom_button {
+  height: 60px;
+}
+
+button {
+  color: #ffffff;
+  background-color: green;
+  outline: none;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 6px 6px;
+}

@@ -1,0 +1,43 @@
+#home {
+  text-align: center;
+  width: 100%;
+  margin-top: 0px;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+#content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.home_data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.home_card_info {
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: #ecf0f3;
+  border: solid 1px #979797;
+  padding: 10px 10px;
+  border-radius: 10px;
+  width: 40%;
+  height: 89vh;
+  overflow-y: scroll;
+}
+
+.restaurant_home_card_info p {
+  color: #ffffff;
+}
+
+#adicionar-paciente {
+  width: 50%;
+  margin-top: 12%;
+}
