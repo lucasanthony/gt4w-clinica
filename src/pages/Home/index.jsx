@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./styles.css";
 
 import axios from "axios";
+import Api from "../../services/api";
 
 import Card from "../../components/Card";
 import CustomInput from "../../components/CustomInput";
@@ -14,43 +15,33 @@ export default function Home(props) {
   const [dataNascimento, setDataNascimento] = useState("");
   const [peso, setPeso] = useState("");
   const [altura, setAltura] = useState("");
+  const [cpf, setCpf] = useState("");
   const [uf, setUf] = useState("");
   const [ufs, setUfs] = useState([]);
   const [role, setRole] = useState("");
-  const [enfermeiros, setEnfermeiros] = useState([
-    { nome: "Enfermeiro 1" },
-    { nome: "Enfermeiro 2" },
-    { nome: "Enfermeiro 3" },
-    { nome: "Enfermeiro 4" },
-    { nome: "Enfermeiro 5" },
-    { nome: "Enfermeiro 6" },
-    { nome: "Enfermeiro 7" },
-  ]);
-  const [pacientes, setPacientes] = useState([
-    { nome: "Paciente 1", data_nascimento: "09/08/1997", peso: "88", uf: "PB" },
-    { nome: "Paciente 2", data_nascimento: "24/08/1999", peso: "81", uf: "PB" },
-    { nome: "Paciente 3", data_nascimento: "23/07/1999", peso: "70", uf: "RN" },
-    { nome: "Paciente 4", data_nascimento: "24/10/1977", peso: "56", uf: "PB" },
-    { nome: "Paciente 5", data_nascimento: "24/08/1999", peso: "66", uf: "PE" },
-    { nome: "Paciente 6", data_nascimento: "21/05/1999", peso: "71", uf: "RN" },
-    { nome: "Paciente 7", data_nascimento: "24/01/1994", peso: "88", uf: "PB" },
-    {
-      nome: "Paciente 8",
-      data_nascimento: "10/08/1993",
-      peso: "95",
-      uf: "PE",
-    },
-    { nome: "Paciente 9", data_nascimento: "24/12/1992", peso: "90", uf: "PB" },
-    {
-      nome: "Paciente 10",
-      data_nascimento: "11/08/1995",
-      peso: "88",
-      uf: "PB",
-    },
-  ]);
+  const [enfermeiros, setEnfermeiros] = useState([]);
+  const [pacientes, setPacientes] = useState([]);
 
   useEffect(() => {
-  })
+    if (role !== "ENFERMEIRO") {
+      const fetchPacientes = async () => {
+        const response = await Api.get("paciente/");
+        setPacientes(response.data);
+      };
+
+      const fetchEnfermeiros = async () => {
+        const response = await Api.get("usuario/");
+        setEnfermeiros(response.data);
+      };
+
+      try {
+        fetchPacientes();
+        fetchEnfermeiros();
+      } catch (error) {
+        notify({ type: "error", message: "Tente novamente mais tarde!" });
+      }
+    }
+  }, []);
 
   useEffect(() => {
     // requisição para busvcar estados
@@ -66,8 +57,25 @@ export default function Home(props) {
     } catch (error) {
       notify({ type: "error", message: "Ocorreu um erro" });
     }
-    setRole("MEDICO");
+    setRole(localStorage.getItem("role"));
   }, []);
+
+  const salvarPaciente = async () => {
+    try {
+      const body = {
+        nome: nome,
+        data_nascimento: dataNascimento,
+        peso: peso,
+        altura: altura,
+        uf: uf,
+        cpf: "12345004444",
+      };
+      const response = await Api.post("paciente/", body);
+      setPacientes([...pacientes, response.data]);
+    } catch (error) {
+      notify({ type: "error", message: "Tente novamente mais tarde!" });
+    }
+  };
 
   const changeNome = (ev) => {
     document.getElementById("nome_input").style.border = "none";
@@ -91,7 +99,11 @@ export default function Home(props) {
 
   const changeUf = (ev) => {
     setUf(ev.target.value);
-  }
+  };
+
+  const changeCpf = (ev) => {
+    setCpf(ev.target.value);
+  };
 
   return (
     <div id="home">
@@ -105,6 +117,13 @@ export default function Home(props) {
               type="name"
               onChangeAction={changeNome}
               value={nome}
+            />
+            <CustomInput
+              placeholder="CPF do paciente"
+              id="cpf_input"
+              type="password"
+              onChangeAction={changeCpf}
+              value={cpf}
             />
             <CustomInput
               placeholder="Peso do paciente"
@@ -129,10 +148,16 @@ export default function Home(props) {
             />
             <select name="ufs" id="ufs_select" onChange={changeUf}>
               {ufs.map((uf) => (
-                <option key={uf.id} value={uf.nome}>{uf.nome}</option>
+                <option key={uf.id} value={uf.nome}>
+                  {uf.nome}
+                </option>
               ))}
             </select>
-            <CustomButton text="Cadastrar" id="adicionar-paciente" />
+            <CustomButton
+              text="Cadastrar"
+              id="adicionar-paciente"
+              onClickAction={salvarPaciente}
+            />
           </div>
 
           {role === "MEDICO" ? (
@@ -145,14 +170,19 @@ export default function Home(props) {
                     data_nascimento={paciente.data_nascimento}
                     peso={paciente.peso}
                     uf={paciente.uf}
+                    altura={paciente.altura}
                     key={paciente.nome}
+                    id={paciente.id}
                   />
                 ))}
               </div>
               <div className="home_card_info">
                 <h3 id="pacientes_h3">Enfermeiros</h3>
                 {enfermeiros.map((enfermeiro) => (
-                  <EnfermeiroCard key={enfermeiro.nome} nome={enfermeiro.nome} />
+                  <EnfermeiroCard
+                    key={enfermeiro.nome}
+                    nome={enfermeiro.nome}
+                  />
                 ))}
               </div>
             </>
