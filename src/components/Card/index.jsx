@@ -1,21 +1,25 @@
 import React from "react";
 import "./styles.css";
 import { FiTrash2 } from "react-icons/fi";
+import Api from "../../services/api";
+import notify from "../../services/toastify";
 
 export default function Card(props) {
   const deletePaciente = async () => {
     const confirm = window.confirm("Confirmar remoção do paciente?");
     if (confirm) {
-      //   try {
-      //     await Api.delete(
-      //       `/employee/${props.id}
-      //       }`
-      //     );
-      //     props.deleteEmployee(props.id);
-      //     props.changePopUpState();
-      //   } catch (error) {
-      //     console.log(error);
-      //   }
+      try {
+        await Api.delete(
+          `paciente/${props.id}
+            }`
+        );
+        notify({
+          type: "sucess",
+          message: "Paciente deletado, recarregue a página!",
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

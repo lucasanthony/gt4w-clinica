@@ -1,10 +1,10 @@
 import axios from 'axios'
 
 const Api = axios.create({
-  baseURL: 'localhost:8080/',
+  baseURL: 'https://api-gt4w-clinica.herokuapp.com/',
   headers: {
     "Content-type": "application/json",
-    "Authorization": "Bearer " + localStorage.getItem("auth_token")
+    "Authorization": "Bearer " + localStorage.getItem("clinica_token")
   }
 });
 

@@ -6,53 +6,47 @@ import Api from "../../services/api";
 import notify from "../../services/toastify";
 
 export default function Login(props) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [nome, setNome] = useState("");
+  const [senha, setSenha] = useState("");
 
-  useEffect(() => {
-    const newEmail = props.location?.state?.email;
-    if (newEmail) {
-      setEmail(newEmail);
-    }
-  }, []);
-
-  const changeEmail = (ev) => {
-    document.getElementById("username_input").style.border = "none";
-    setEmail(ev.target.value);
+  const changeNome = (ev) => {
+    document.getElementById("nome_input").style.border = "none";
+    setNome(ev.target.value);
   };
 
-  const changePassword = (ev) => {
-    document.getElementById("password_input").style.border = "none";
-    setPassword(ev.target.value);
+  const changeSenha = (ev) => {
+    document.getElementById("senha_input").style.border = "none";
+    setSenha(ev.target.value);
   };
 
   const handleLogin = async () => {
-    let password_input = document.getElementById("password_input");
-    let username_input = document.getElementById("username_input");
+    let senha_input = document.getElementById("senha_input");
+    let nome_input = document.getElementById("nome_input");
 
-    if (!email) username_input.style.border = "solid 2px red";
+    if (!nome) nome_input.style.border = "solid 2px red";
 
-    if (!password) password_input.style.border = "solid 2px red";
+    if (!senha) senha_input.style.border = "solid 2px red";
     else {
       try {
         const body = {
-          email: email,
-          password: password,
+          nome: nome,
+          senha: senha,
         };
 
-        // let response = await Api.post("/adm/signIn", body);
+        let response = await Api.post("/auth/", body);
 
-        // const token = response.data.token;
-        // localStorage.setItem("auth_token", response.data.token);
-        localStorage.setItem("isAuthenticated", true);
+        const token = response.data[0];
+        localStorage.setItem("clinica_token", token);
+        localStorage.setItem("role", response.data[1]);
+        localStorage.setItem("isauth", true);
 
         goToHome();
       } catch (error) {
         if (error.message === "Request failed with status code 404") {
-          username_input.style.border = "solid 2px red";
+          nome_input.style.border = "solid 2px red";
           notify({"type": "error", "message": "Email não cadstrado!"});
         } else if (error.message === "Request failed with status code 401") {
-          password_input.style.border = "solid 2px red";
+          senha_input.style.border = "solid 2px red";
           notify({"type": "error", "message": "Senha incorreta!"});
         } else {
           console.error(error.message);
@@ -73,18 +67,18 @@ export default function Login(props) {
         <div className="title">Entre na sua conta</div>
         <div className="fields">
           <CustomInput
-            id="username_input"
+            id="nome_input"
             type="username"
-            placeholder="Digite o email"
-            onChangeAction={changeEmail}
-            value={email}
+            placeholder="Digite o seu nome"
+            onChangeAction={changeNome}
+            value={nome}
           />
           <CustomInput
-            id="password_input"
+            id="senha_input"
             type="password"
             placeholder="Digite a senha"
-            onChangeAction={changePassword}
-            value={password}
+            onChangeAction={changeSenha}
+            value={senha}
           />
           <div className="link">
           </div>

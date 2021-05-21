@@ -4,13 +4,10 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 
-import { isAuthenticated } from '../auth/index';
-
-isAuthenticated();
-const auth = localStorage.getItem("isAuthenticated");
+const auth = localStorage.getItem("isauth");
 
 const routes = () =>
-  true ? ( // mock
+  auth ? (
     <Switch>
       <Route exact={true} path="/" component={Login} />
       <Route exact={true} path="/home" component={Home} />
